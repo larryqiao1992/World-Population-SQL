@@ -1,0 +1,91 @@
+--1.Calculate the total population and average growth rate for each continent
+	Select
+	Continent,
+	Sum(2024Population)as 2024Total,
+	Sum(2023Population) as 2023Total,
+	Concat(Round(avg(growth_rate)*100,2),'%') as Average_Growth_Rate
+	From
+	Worldpopulation
+	Group by
+	Continent
+	Order by
+	Average_growth_Rate desc
+
+--2.Calculate the total population and top 10 average growth rate for each country
+	Select
+	Country,
+	Sum(2024Population) as 2024Total,
+	Sum(2023Population) as 2023Total,
+	Concat(Round(avg(Growth_Rate)*100,2),'%') as Average_Growth_Rate
+	From
+	Worldpopulation
+	Group by
+	Country
+	Order by
+	Average_Growth_Rate desc
+	Limit 10
+
+--3.Calculate the total population and top 10 average growth rate for each city
+	Select
+	City,
+	Sum(2024Population) as 2024Total,
+	Sum(2023Population) as 2023Total,
+	Round(avg(Growth_Rate),4) as Average_Growth_Rate
+	From
+	Worldpopulation
+	Group by
+	City
+	Order by
+	Average_Growth_Rate desc
+	Limit 10
+
+--4.Sort by growth rate and select the bottom 10 Country
+	Select
+	Country,
+	Sum(2024Population) as 2024Total,
+	Sum(2023Population) as 2023Total,
+	Round(avg(Growth_Rate),4) as GrowthRate
+	From
+	Worldpopulation
+	Group by
+	Country
+	Order by
+	GrowthRate
+	Limit 10
+
+--5.Sort by growth rate and select the bottom 10 City
+	Select
+	City,
+	Sum(2024Population) as 2024Total,
+	Sum(2023Population) as 2023Total,
+	Round(avg(Growth_Rate),4) as GrowthRate
+	From
+	Worldpopulation
+	Group by
+	City
+	Order by
+	GrowthRate
+	Limit 10
+
+--6.Analyze the distribution of growth rates
+	Select
+	Growth_Rate,
+	Count(Growth_Rate) as Frequency
+	From
+	Worldpopulation
+	Group by
+	Growth_rate
+
+--7.Analyze the distribution of growth rates by continent
+	Select
+	Continent,
+	Round(avg(Growth_Rate),3) as Growth_Rate,
+	Round(max(Growth_Rate),3) as Top,
+	Round(min(Growth_Rate),3) as bottom
+	From
+	Worldpopulation
+	Group by
+	Continent
+	Order by
+	Continent
+
